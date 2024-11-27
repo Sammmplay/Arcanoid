@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movimientojugador : MonoBehaviour
+public class MovimientoJugador : MonoBehaviour
 {
     [SerializeField]
     float movimientoEjeX;
