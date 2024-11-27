@@ -95,6 +95,8 @@ public class ScreenScript : MonoBehaviour
     public void AjustarCalidad()
     {
         QualitySettings.SetQualityLevel(dropdown.value);
+        PlayerPrefs.SetInt("numeroDeCalidad", dropdown.value);
+        calidad=dropdown.value;
     }
     public void SubirVolumenButton()
     {

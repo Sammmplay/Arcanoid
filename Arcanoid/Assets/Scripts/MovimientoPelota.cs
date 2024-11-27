@@ -29,16 +29,17 @@ public class MovimientoPelota : MonoBehaviour
         }
 
 
-        float minutos = Mathf.FloorToInt(tiempoPartida  / 60f);
-        float segundos = Mathf.FloorToInt(tiempoPartida % 60f);
-        float milesimas = Mathf.FloorToInt((tiempoPartida *60f) %60f);
-        timeLabel.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, milesimas);
+        float minutos = Mathf.FloorToInt(tiempoPartida  / 60F);
+        float segundos = Mathf.FloorToInt(tiempoPartida % 60F);
+        float milesimas = Mathf.FloorToInt((tiempoPartida *60) %60F);
+        
         
 
         if (pelotaMoviendose==true)
         {    
             tiempoPartida += Time.deltaTime;
             timeLabel.text = tiempoPartida.ToString();
+            timeLabel.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, milesimas);
         }
 
     }

@@ -386,7 +386,7 @@ MonoBehaviour:
   canvasPausa: {fileID: 1783680687}
   movimientoJugador: {fileID: 1986086885}
   movimientoPelota: {fileID: 1143618610}
-  dropdown: {fileID: 0}
+  dropdown: {fileID: 172320317}
   calidad: 0
 --- !u!1 &68689584
 GameObject:
@@ -747,11 +747,17 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: Ultra
+      m_Image: {fileID: 0}
+    - m_Text: Muy alta
+      m_Image: {fileID: 0}
     - m_Text: Alta
       m_Image: {fileID: 0}
     - m_Text: Media
       m_Image: {fileID: 0}
     - m_Text: Baja
+      m_Image: {fileID: 0}
+    - m_Text: Muy baja
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4474,7 +4480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00:00
+  m_text: 00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5062,9 +5068,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLabel: {fileID: 1035088497}
   tiempoPartida: 0
-  minutos: 0
-  segundos: 0
-  milesimas: 0
 --- !u!1 &1174090141
 GameObject:
   m_ObjectHideFlags: 0
@@ -5122,7 +5125,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Alta
+  m_text: Ultra
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8820,6 +8823,10 @@ MonoBehaviour:
   movimientoEjeY: 0
   movimientoEjeZ: 0
   velocidadMovimiento: 15
+  minX: 100
+  maxX: 1
+  minZ: 100
+  maxZ: 1
 --- !u!65 &1986086886
 BoxCollider:
   m_ObjectHideFlags: 0
