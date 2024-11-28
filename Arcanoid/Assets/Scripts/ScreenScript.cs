@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScreenScript : MonoBehaviour
 {
@@ -29,13 +30,21 @@ public class ScreenScript : MonoBehaviour
     MovimientoPelota movimientoPelota;
 
     [SerializeField]
+    Slider slide;
+    [SerializeField]
+    float value;
+
+    [SerializeField]
     TMP_Dropdown dropdown;
     [SerializeField]
     int calidad;
 
-    float tiempoSinFuncionar = 0f;
+    bool estaJugando;
+
+    //float tiempoSinFuncionar = 0f;
     void Start()
     {
+        estaJugando = false;
         pantallaI.SetActive(true);
         pantallaG.SetActive(false);
         pantallaP.SetActive(false);
@@ -53,14 +62,15 @@ public class ScreenScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (estaJugando & Input.GetKeyDown(KeyCode.Escape))
         {
-            canvasPausa.SetActive(true );
-        }
+            canvasPausa.SetActive(true);
+        }   
     }
 
     public void StartButton()
     {
+        estaJugando = false;
         pantallaI.SetActive(false);
         pantallaInfo.SetActive(true);
         canvasJuego.SetActive(true);
@@ -74,6 +84,7 @@ public class ScreenScript : MonoBehaviour
     {
         pantallaInfo.SetActive(false);
         canvasPausa.SetActive(false);
+        estaJugando = true;
         //tiempoSinFuncionar += Time.deltaTime;
         //if (tiempoSinFuncionar>=5.0f)
         //{
@@ -84,6 +95,7 @@ public class ScreenScript : MonoBehaviour
 
     public void OptionButton()
     {
+        estaJugando = false;
         LeanTween.moveLocalX(pantallaI, -1920f, 1f).setOnComplete(() =>
         {
             pantallaI.SetActive(false);
@@ -94,24 +106,27 @@ public class ScreenScript : MonoBehaviour
 
     public void AjustarCalidad()
     {
+        estaJugando = false;
         QualitySettings.SetQualityLevel(dropdown.value);
         PlayerPrefs.SetInt("numeroDeCalidad", dropdown.value);
         calidad=dropdown.value;
     }
-    public void SubirVolumenButton()
+
+    //los dos siguientes void son para controlar el volumen
+    public void VolumenSlide()
+    {
+        estaJugando = false;
+        //slide.value = PlayerPrefs.GetFloat( 0.5f);
+        slide.value = value;
+        //AudioListerner. ;
+    }
+
+    public void ChangeVolumen()
     {
 
     }
 
-    public void BajarVolumenButton()
-    {
-
-    }
-
-    public void CalidadButton()
-    {
-
-    }
+   
 
     public void ReturnButton()
     {
@@ -121,6 +136,7 @@ public class ScreenScript : MonoBehaviour
         });
         pantallaI.SetActive(true);
         LeanTween.moveLocalX(pantallaI, 0, 1f);
+        //movimientoPelota.Update().tiempoPartida = 0.00f;
     }
 
     public void SalirButton()
@@ -131,6 +147,7 @@ public class ScreenScript : MonoBehaviour
 
     public void PantallaDeInicioButton()
     {
+        estaJugando = false;
         canvasPausa.SetActive(false);
         pantallaG.SetActive(false);
         pantallaP.SetActive(false);
@@ -138,6 +155,7 @@ public class ScreenScript : MonoBehaviour
     }
     public void ReintentarButton()
     {
+        estaJugando = false;
         pantallaG.SetActive(false);
         pantallaP.SetActive(false);
     }

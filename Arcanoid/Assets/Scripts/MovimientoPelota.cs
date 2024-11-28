@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using TMPro.EditorUtilities;
 
 public class MovimientoPelota : MonoBehaviour
 {
@@ -13,7 +14,16 @@ public class MovimientoPelota : MonoBehaviour
 
     bool pelotaMoviendose = false;
 
-    // Update is called once per frame
+    [SerializeField]
+    GameObject paredAbajo;
+
+    [SerializeField]
+    Rigidbody pelotaRb;
+
+    void Start()
+    {
+        pelotaRb= GetComponent<Rigidbody>();
+    }
     void Update()
     {
         //float minutos = tiempoPartida / 60f;
@@ -22,10 +32,11 @@ public class MovimientoPelota : MonoBehaviour
 
         //return minutos.ToString("00") + ":" + segundos.ToString("00") + ":" + milesimas.ToString("00");
 
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             pelotaMoviendose = true;
             gameObject.transform.position = Vector3.one;
+            //pelotaRb.freezeRotation = false;
         }
 
 
@@ -42,5 +53,10 @@ public class MovimientoPelota : MonoBehaviour
             timeLabel.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, milesimas);
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if (pelotaMoviendose)
     }
 }
