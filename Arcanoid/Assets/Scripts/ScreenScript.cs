@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,14 +32,28 @@ public class ScreenScript : MonoBehaviour
     MovimientoPelota movimientoPelota;
 
     [SerializeField]
-    Slider slide;
+    Slider slideVolume;
     [SerializeField]
-    float value;
+    float valueVolume;
+    [SerializeField]
+    Image imagenMuteO;
+    [SerializeField]
+    Image imagenMuteJ;
 
     [SerializeField]
-    TMP_Dropdown dropdown;
+    Slider slideBrillo;
     [SerializeField]
-    int calidad;
+    float valueBrillo;
+    [SerializeField]
+    Image imagenBrillo;
+
+    [SerializeField]
+    Toggle pantallaCompleta;
+
+    [SerializeField]
+    TMP_Dropdown resolutionDropdown;
+    Resolution[] resoluciones;
+    
 
     bool estaJugando;
 
@@ -54,9 +70,20 @@ public class ScreenScript : MonoBehaviour
         movimientoPelota.enabled = false;
         canvasJuego.SetActive(false);
         canvasPausa.SetActive(false);
-        calidad = PlayerPrefs.GetInt("numeroDeCalidad", 3);
-        dropdown.value = calidad;
-        AjustarCalidad();
+        slideVolume.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
+        AudioListener.volume = slideVolume.value;
+        Mute();
+        slideBrillo.value = PlayerPrefs.GetFloat("brillo", 0.5f);
+        imagenBrillo.color = new Color(imagenBrillo.color.r, imagenBrillo.color.g, imagenBrillo.color.b, slideBrillo.value);
+        if (Screen.fullScreen)
+        {
+            pantallaCompleta.isOn = true;
+        }
+        else
+        {
+            pantallaCompleta.isOn = false;
+        }
+        RevisarResolucion();
     }
 
     // Update is called once per frame
@@ -104,29 +131,69 @@ public class ScreenScript : MonoBehaviour
         LeanTween.moveLocalX(pantallaO, 0, 1f);
     }
 
-    public void AjustarCalidad()
-    {
-        estaJugando = false;
-        QualitySettings.SetQualityLevel(dropdown.value);
-        PlayerPrefs.SetInt("numeroDeCalidad", dropdown.value);
-        calidad=dropdown.value;
-    }
-
     //los dos siguientes void son para controlar el volumen
-    public void VolumenSlide()
+    public void VolumenSlide(float valor)
     {
         estaJugando = false;
-        //slide.value = PlayerPrefs.GetFloat( 0.5f);
-        slide.value = value;
-        //AudioListerner. ;
+        valueVolume = valor;
+        PlayerPrefs.SetFloat("volumenAudio", valueVolume);
+        AudioListener.volume = valueVolume;
+        Mute();
     }
 
-    public void ChangeVolumen()
+    public void Mute()
     {
-
+        if (valueVolume == 0)
+        {
+            imagenMuteO.enabled = true;
+            imagenMuteJ.enabled = true;
+        }
+        else
+        {
+            imagenMuteO.enabled = false;
+            imagenMuteJ.enabled = false;
+        }
     }
 
-   
+    public void BrilloSlide (float valor)
+    {
+        valueBrillo = valor;
+        PlayerPrefs.SetFloat("brillo", valueBrillo);
+        imagenBrillo.color = new Color(imagenBrillo.color.r, imagenBrillo.color.g, imagenBrillo.color.b, slideBrillo.value);
+    }
+    
+    public void ActivarPantallaCompleta (bool pantallaCompleta)
+    {
+        Screen.fullScreen = pantallaCompleta;
+    }
+
+    public void RevisarResolucion()
+    {
+        resoluciones = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
+        List<string> opciones = new List<string>();
+        int resolucionActual = 0;
+
+        for (int i = 0; i< resoluciones.Length; i++)
+        {
+            string opcion = resoluciones[i].width + "x" + resoluciones[i].height;
+            opciones.Add(opcion);
+
+            if (Screen.fullScreen && resoluciones[i].width == Screen.currentResolution.width && resoluciones[i].height == Screen.currentResolution.height)
+            {
+                resolucionActual = i;
+            }
+        }
+        resolutionDropdown.AddOptions(opciones);
+        resolutionDropdown.value = resolucionActual;
+        resolutionDropdown.RefreshShownValue();
+    }
+
+    public void CambiarResolucion (int indiceResolucion)
+    {
+        Resolution resolucion = resoluciones[indiceResolucion];
+        Screen.SetResolution(resolucion.width, resolucion.height, Screen.fullScreen);
+    }
 
     public void ReturnButton()
     {
@@ -151,6 +218,7 @@ public class ScreenScript : MonoBehaviour
         canvasPausa.SetActive(false);
         pantallaG.SetActive(false);
         pantallaP.SetActive(false);
+        canvasJuego.SetActive(false);
         pantallaI.SetActive(true);
     }
     public void ReintentarButton()
