@@ -9,10 +9,11 @@ using UnityEngine.UI;
 
 public class ScreenScript : MonoBehaviour
 {
+
     [SerializeField]
     GameObject pantallaI;
     [SerializeField]
-    GameObject pantallaG;
+    public GameObject pantallaG;
     [SerializeField]
     GameObject pantallaP;
     [SerializeField]

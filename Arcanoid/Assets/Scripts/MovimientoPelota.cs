@@ -20,6 +20,7 @@ public class MovimientoPelota : MonoBehaviour
 
     [SerializeField]
     public Vector3 velPelota;
+    
 
     public bool juegoEmpezo;
 
@@ -33,6 +34,9 @@ public class MovimientoPelota : MonoBehaviour
 
     [SerializeField]
     Vector3 posInicial;
+
+    [SerializeField]
+    GameObject canvasJuego;
 
     void Start()
     {
@@ -52,16 +56,18 @@ public class MovimientoPelota : MonoBehaviour
             tiempoPartida += Time.deltaTime;
             timeLabel.text = tiempoPartida.ToString();
             timeLabel.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, milesimas);
+            transform.parent = null;
             //transform.position = new Vector3(0, 2.25f, 3.8f);
         }
         else
         {
-            transform.position = posInicial;
+            //transform.position = posInicial;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                
                 juegoEmpezo = true;
-                transform.parent = null;
+                
                 pelotaRb.velocity = velPelota;
                 
                 //gameObject.transform.position = ;
@@ -80,11 +86,15 @@ public class MovimientoPelota : MonoBehaviour
                 vidaLabel.text = vidas.ToString();
                 juegoEmpezo = false;
                 FindObjectOfType<MovimientoJugador>().ResetPlayer();
-                transform.parent = FindObjectOfType<MovimientoJugador>().transform;
+                gameObject.transform.parent = FindObjectOfType<MovimientoJugador>().transform;
+                transform.position = posInicial;
+                juegoEmpezo = false;
+                pelotaRb.velocity=Vector3.zero;
             }
             else if (vidas == 0)
             {
                 pantallaP.SetActive(true);
+                canvasJuego.SetActive(false);
                 juegoEmpezo = false;
             }
         }

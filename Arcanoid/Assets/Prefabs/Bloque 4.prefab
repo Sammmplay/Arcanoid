@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8152486039162528480}
   - component: {fileID: 5361645471634093080}
   - component: {fileID: 6776771627138440928}
-  - component: {fileID: -26177525767432442}
+  - component: {fileID: 4837252938336973173}
   m_Layer: 0
   m_Name: Bloque 4
-  m_TagString: Untagged
+  m_TagString: Bloq
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-26177525767432442
+--- !u!114 &4837252938336973173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +115,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1152787458964853246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e281f9e6aa27270449fbcb207a32f6a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e7f56d7930dc484082c326af5b0538a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vidaBloq: 1
+  totalBloq: 16
+  pantallaG: {fileID: 0}
