@@ -37,7 +37,7 @@ public class MovimientoJugador : MonoBehaviour
         movimientoEjeX = Input.GetAxis("Horizontal");
         movimientoEjeZ = Input.GetAxis("Vertical");
         
-        jugadorRb.velocity = new Vector3(movimientoEjeX * velocidadMovimiento * Time.deltaTime, 0, movimientoEjeZ * velocidadMovimiento * Time.deltaTime);
+        jugadorRb.velocity = new Vector3(movimientoEjeX * velocidadMovimiento * Time.deltaTime, 0, movimientoEjeZ * velocidadMovimiento * Time.deltaTime);*/
 
     [SerializeField]
     private float speed = 7f;
@@ -93,29 +93,7 @@ public class MovimientoJugador : MonoBehaviour
             Vector3 posicion= transform.position;
             posicion.x = Mathf.Clamp(posicion.x*movX*velocidadMov *Time.deltaTime, maxX, minX);
             posicion.z= Mathf.Clamp(posicion.z*movZ*velocidadMov * Time.deltaTime, maxZ, minZ);*/
-
-    [SerializeField]
-    float velMov;
-    [SerializeField]
-    float maxX;
-    [SerializeField]
-    float minX;
-    [SerializeField]
-    float maxY;
-    [SerializeField]
-    float minY;
-
-    void Update()
-    {
-        float movX = Input.GetAxisRaw("Horizontal");
-       // float movY = Input.GetAxisRaw("Vertical");
-
-        Vector2 playerPosition = transform.position;
-        playerPosition.x = Mathf.Clamp(playerPosition.x + movX *velMov*Time.deltaTime, maxX, minX);
-       // playerPosition.y =Mathf.Clamp(playerPosition.y+movY*velMov*Time.deltaTime, maxY, minY);
-       transform.position = playerPosition;
     }
+
 }
-
-
 
