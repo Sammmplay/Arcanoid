@@ -26,10 +26,20 @@ public class MovimientoPelota : MonoBehaviour
     [SerializeField]
     GameObject pantallaP;
 
+    [SerializeField]
+    float vidas = 3;
+    [SerializeField]
+    TextMeshProUGUI vidaLabel;
+
+    [SerializeField]
+    Vector3 posInicial;
+
     void Start()
     {
         pelotaRb= GetComponent<Rigidbody>();
-
+        posInicial = transform.position;
+        
+        //new Vector3()
     }
     void Update()
     {
@@ -43,14 +53,19 @@ public class MovimientoPelota : MonoBehaviour
             tiempoPartida += Time.deltaTime;
             timeLabel.text = tiempoPartida.ToString();
             timeLabel.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, milesimas);
+            //transform.position = new Vector3(0, 2.25f, 3.8f);
         }
         else
-        { 
+        {
+            transform.position = posInicial;
+            //transform.parent = ;
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 juegoEmpezo = true;
                 transform.parent = null;
                 pelotaRb.velocity = velPelota;
+                
                 //gameObject.transform.position = ;
             }
         }
@@ -62,8 +77,19 @@ public class MovimientoPelota : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Muro"))
         {
-            pantallaP.SetActive(true);
-            juegoEmpezo = false;
+            
+            if (vidas > 0)
+            {
+                vidas--;
+                vidaLabel.text = vidas.ToString();
+                juegoEmpezo = false;
+               // FindObjectOfType<MovimientoJugador>.ResetPlayer();
+            }
+            else if (vidas == 0)
+            {
+                pantallaP.SetActive(true);
+                juegoEmpezo = false;
+            }
         }
     }
 

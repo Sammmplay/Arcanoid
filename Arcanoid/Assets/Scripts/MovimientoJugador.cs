@@ -55,16 +55,20 @@ public class MovimientoJugador : MonoBehaviour
 
     bool juegoEmpezo;
 
+    [SerializeField]
+    Vector3 posInicial;
+
 
     private void Start()
     {
-
+        juegoEmpezo = true;
+        posInicial = transform.position;
     }
 
     void Update()
     {
         //if (juegoEmpezo)
-        //{
+       // {
             float movement = Input.GetAxisRaw("Horizontal");
             float partida = Input.GetAxisRaw("Vertical");
 
@@ -75,14 +79,10 @@ public class MovimientoJugador : MonoBehaviour
             newPosZ = Mathf.Clamp(newPosZ, minZ, maxZ);
 
             transform.position = new Vector3(newPosX, transform.position.y, newPosZ);
-        //}
+       // }
         /*else
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                juegoEmpezo = true;
-                //gameObject.transform.position = ;
-            }
+            transform.position = posInicial;
         }
 
         /*[SerializeField]

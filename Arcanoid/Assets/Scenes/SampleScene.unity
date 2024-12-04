@@ -608,13 +608,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76574797}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.26808792, y: 0.12863065, z: -0.037551202, w: 0.9540299}
-  m_LocalPosition: {x: -850.216, y: -755.974, z: 343.3992}
-  m_LocalScale: {x: 81.85786, y: 70.26455, z: 1.8972331}
+  m_LocalRotation: {x: -0.47139618, y: -0.0109428745, z: -0.004801857, w: -0.88184065}
+  m_LocalPosition: {x: -999.373, y: -686, z: 392.797}
+  m_LocalScale: {x: 103.981094, y: 94.16504, z: 1.8972331}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 42535288}
-  m_LocalEulerAnglesHint: {x: 31.412, y: 15.307, z: -0.18}
+  m_LocalEulerAnglesHint: {x: 56.231, y: 2.457, z: 1.937}
 --- !u!1 &88146548
 GameObject:
   m_ObjectHideFlags: 0
@@ -5858,8 +5858,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.26566136, y: -0.13909715, z: 0.038760655, w: -0.95319134}
-  m_LocalPosition: {x: -13.650185, y: 29.376778, z: -26.427687}
+  m_LocalRotation: {x: -0.38463205, y: 0.0005456209, z: -0.00024187192, w: -0.92306983}
+  m_LocalPosition: {x: 2.3166814, y: 41.0108, z: -16.379072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6662,7 +6662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1084366787
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6885,9 +6885,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 4
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!135 &1143618607
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6974,8 +6974,11 @@ MonoBehaviour:
   timeLabel: {fileID: 1035088497}
   tiempoPartida: 0
   pelotaRb: {fileID: 1143618606}
-  velPelota: {x: 20, y: 0, z: 20}
+  velPelota: {x: 30, y: 0, z: 30}
   pantallaP: {fileID: 960772534}
+  vidas: 3
+  vidaLabel: {fileID: 1513535451}
+  posInicial: {x: 0, y: 0, z: 0}
 --- !u!1 &1165971333
 GameObject:
   m_ObjectHideFlags: 0
@@ -12706,11 +12709,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a504f7d0cc17eb74bb78798723332397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 30
   minX: -21.52
   maxX: 25.81
   minZ: -4
   maxZ: 18
+  posInicial: {x: 0, y: 0, z: 0}
 --- !u!65 &1986086886
 BoxCollider:
   m_ObjectHideFlags: 0
