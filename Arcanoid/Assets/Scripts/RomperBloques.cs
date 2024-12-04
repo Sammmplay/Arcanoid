@@ -7,9 +7,7 @@ public class BloquesRomper : MonoBehaviour
     public int vidaBloq = 2;
     public int totalBloq = 16;
 
-    [SerializeField]
-    GameObject pantallaG;
-    // Start is called before the first frame update
+        // Start is called before the first frame update
     void Start()
     {
 
@@ -36,7 +34,7 @@ public class BloquesRomper : MonoBehaviour
             totalBloq--;
             if (totalBloq <= 0)
             {
-                pantallaG.SetActive(true);
+                FindObjectOfType<ScreenScript>().pantallaG.SetActive(true);
             }
 
         }
