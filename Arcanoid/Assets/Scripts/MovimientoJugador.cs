@@ -53,6 +53,8 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField]
     private float maxZ = 7.7f;
 
+    bool juegoEmpezo;
+
 
     private void Start()
     {
@@ -61,18 +63,27 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
+        //if (juegoEmpezo)
+        //{
+            float movement = Input.GetAxisRaw("Horizontal");
+            float partida = Input.GetAxisRaw("Vertical");
 
+            float newPosX = transform.position.x + movement * speed * Time.deltaTime;
+            float newPosZ = transform.position.z + partida * speed * Time.deltaTime;
 
-        float movement = Input.GetAxisRaw("Horizontal");
-        float partida = Input.GetAxisRaw("Vertical");
+            newPosX = Mathf.Clamp(newPosX, minX, maxX);
+            newPosZ = Mathf.Clamp(newPosZ, minZ, maxZ);
 
-        float newPosX = transform.position.x + movement * speed * Time.deltaTime;
-        float newPosZ = transform.position.z + partida * speed * Time.deltaTime;
-       
-        newPosX = Mathf.Clamp(newPosX, minX, maxX);
-        newPosZ = Mathf.Clamp(newPosZ, minZ, maxZ);
-
-        transform.position = new Vector3(newPosX, transform.position.y, newPosZ);
+            transform.position = new Vector3(newPosX, transform.position.y, newPosZ);
+        //}
+        /*else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                juegoEmpezo = true;
+                //gameObject.transform.position = ;
+            }
+        }
 
         /*[SerializeField]
         float velocidadMov;

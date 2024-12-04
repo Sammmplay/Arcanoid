@@ -228,6 +228,7 @@ public class ScreenScript : MonoBehaviour
         estaJugando = false;
         pantallaG.SetActive(false);
         pantallaP.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
 

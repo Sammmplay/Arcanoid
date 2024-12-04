@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using TMPro.EditorUtilities;
+using UnityEditor;
 
 public class MovimientoPelota : MonoBehaviour
 {
@@ -15,48 +16,74 @@ public class MovimientoPelota : MonoBehaviour
     bool pelotaMoviendose = false;
 
     [SerializeField]
-    GameObject paredAbajo;
+    Rigidbody pelotaRb;
 
     [SerializeField]
-    Rigidbody pelotaRb;
+    public Vector3 velPelota;
+
+    bool juegoEmpezo;
+
+    [SerializeField]
+    GameObject pantallaP;
 
     void Start()
     {
         pelotaRb= GetComponent<Rigidbody>();
+
     }
     void Update()
     {
-        //float minutos = tiempoPartida / 60f;
-        //float segundos = tiempoPartida % 60f;
-        //float milesimas = ((tiempoPartida - tiempoPartida) * 1000f);
-
-        //return minutos.ToString("00") + ":" + segundos.ToString("00") + ":" + milesimas.ToString("00");
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            pelotaMoviendose = true;
-            gameObject.transform.position = new Vector3 (-14.3f,1f,1f);
-            //pelotaRb.freezeRotation = false;
-        }
-
-
-        float minutos = Mathf.FloorToInt(tiempoPartida  / 60F);
+        float minutos = Mathf.FloorToInt(tiempoPartida / 60F);
         float segundos = Mathf.FloorToInt(tiempoPartida % 60F);
-        float milesimas = Mathf.FloorToInt((tiempoPartida *60) %60F);
-        
-        
+        float milesimas = Mathf.FloorToInt((tiempoPartida * 60) % 60F);
 
-        if (pelotaMoviendose==true)
-        {    
+        if (juegoEmpezo)
+        {
+            //gameObject.transform.position = new Vector3(0f, 2.25f, 3.8f);
             tiempoPartida += Time.deltaTime;
             timeLabel.text = tiempoPartida.ToString();
             timeLabel.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, milesimas);
         }
+        else
+        { 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                juegoEmpezo = true;
+                transform.parent = null;
+                pelotaRb.velocity = velPelota;
+                //gameObject.transform.position = ;
+            }
+        }
 
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (pelotaMoviendose)
+        if (other.gameObject.CompareTag("Muro"))
+        {
+            pantallaP.SetActive(true);
+            juegoEmpezo = false;
+        }
     }
+
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        pelotaRb.velocity *= velPelota * Time.deltaTime;
+    }
+
+    public void ResetPelota()
+    {
+        pelotaRb.velocity = Vector3.zero;
+        transform.position = new Vector3(0, 2.25f, 3.8f);
+        juegoEmpezo = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Pelota"))
+        {
+            ResetPelota();
+        }
+    }*/
 }
