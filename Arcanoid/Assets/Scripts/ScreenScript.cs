@@ -201,7 +201,9 @@ public class ScreenScript : MonoBehaviour
         {
             pantallaO.SetActive(false);
         });
+        pantallaInfo.SetActive(false);
         pantallaI.SetActive(true);
+        
         LeanTween.moveLocalX(pantallaI, 0, 1f);
         //movimientoPelota.Update().tiempoPartida = 0.00f;
     }

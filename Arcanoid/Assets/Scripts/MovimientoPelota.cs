@@ -35,7 +35,7 @@ public class MovimientoPelota : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             pelotaMoviendose = true;
-            gameObject.transform.position = Vector3.one;
+            gameObject.transform.position = new Vector3 (-14.3f,1f,1f);
             //pelotaRb.freezeRotation = false;
         }
 
