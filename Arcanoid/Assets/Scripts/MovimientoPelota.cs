@@ -21,7 +21,7 @@ public class MovimientoPelota : MonoBehaviour
     [SerializeField]
     public Vector3 velPelota;
 
-    bool juegoEmpezo;
+    public bool juegoEmpezo;
 
     [SerializeField]
     GameObject pantallaP;
@@ -38,8 +38,7 @@ public class MovimientoPelota : MonoBehaviour
     {
         pelotaRb= GetComponent<Rigidbody>();
         posInicial = transform.position;
-        
-        //new Vector3()
+        transform.parent = FindObjectOfType<MovimientoJugador>().transform;
     }
     void Update()
     {
@@ -58,7 +57,6 @@ public class MovimientoPelota : MonoBehaviour
         else
         {
             transform.position = posInicial;
-            //transform.parent = ;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -69,8 +67,6 @@ public class MovimientoPelota : MonoBehaviour
                 //gameObject.transform.position = ;
             }
         }
-
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -83,7 +79,8 @@ public class MovimientoPelota : MonoBehaviour
                 vidas--;
                 vidaLabel.text = vidas.ToString();
                 juegoEmpezo = false;
-               // FindObjectOfType<MovimientoJugador>.ResetPlayer();
+                FindObjectOfType<MovimientoJugador>().ResetPlayer();
+                transform.parent = FindObjectOfType<MovimientoJugador>().transform;
             }
             else if (vidas == 0)
             {

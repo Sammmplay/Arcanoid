@@ -117,6 +117,7 @@ public class ScreenScript : MonoBehaviour
         //{
             movimientoJugador.enabled = true;
             movimientoPelota.enabled=true;
+            
         //}
     }
 

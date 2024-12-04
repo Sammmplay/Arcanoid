@@ -106,5 +106,10 @@ public class MovimientoJugador : MonoBehaviour
             posicion.z= Mathf.Clamp(posicion.z*movZ*velocidadMov * Time.deltaTime, maxZ, minZ);*/
     }
 
+    public void ResetPlayer()
+    {
+        transform.position = posInicial;
+    }
+
 }
 
