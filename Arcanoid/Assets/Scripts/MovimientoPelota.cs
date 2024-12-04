@@ -21,7 +21,11 @@ public class MovimientoPelota : MonoBehaviour
     [SerializeField]
     public Vector3 velPelota;
 
+<<<<<<< Updated upstream
     public bool juegoEmpezo;
+=======
+    [SerializeField] public bool juegoEmpezo;
+>>>>>>> Stashed changes
 
     [SerializeField]
     GameObject pantallaP;
@@ -56,10 +60,16 @@ public class MovimientoPelota : MonoBehaviour
         }
         else
         {
+<<<<<<< Updated upstream
             transform.position = posInicial;
+=======
+            //transform.position = posInicial;
+            //transform.parent = ;
+>>>>>>> Stashed changes
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                
                 juegoEmpezo = true;
                 transform.parent = null;
                 pelotaRb.velocity = velPelota;
@@ -79,8 +89,13 @@ public class MovimientoPelota : MonoBehaviour
                 vidas--;
                 vidaLabel.text = vidas.ToString();
                 juegoEmpezo = false;
+<<<<<<< Updated upstream
                 FindObjectOfType<MovimientoJugador>().ResetPlayer();
                 transform.parent = FindObjectOfType<MovimientoJugador>().transform;
+=======
+                transform.position = posInicial;
+               // FindObjectOfType<MovimientoJugador>.ResetPlayer();
+>>>>>>> Stashed changes
             }
             else if (vidas == 0)
             {
