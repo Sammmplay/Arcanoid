@@ -56,9 +56,12 @@ public class ScreenScript : MonoBehaviour
     Resolution[] resoluciones;
 
     [SerializeField]
-    GameObject pantallaNewG;
+    public GameObject pantallaNewG;
 
     bool estaJugando;
+
+    [SerializeField]
+    public GameObject canvasPowerUp;
 
     //float tiempoSinFuncionar = 0f;
     void Start()
@@ -88,6 +91,7 @@ public class ScreenScript : MonoBehaviour
             pantallaCompleta.isOn = false;
         }
         RevisarResolucion();
+        canvasPowerUp.SetActive(false);
     }
 
     // Update is called once per frame
@@ -212,7 +216,7 @@ public class ScreenScript : MonoBehaviour
     }
 
     public void ReturnButton()
-    {
+    {   
         LeanTween.moveLocalX(pantallaO, 1920, 1f).setOnComplete(() =>
         {
             pantallaO.SetActive(false);

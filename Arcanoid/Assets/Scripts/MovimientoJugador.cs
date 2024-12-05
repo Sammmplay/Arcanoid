@@ -40,35 +40,41 @@ public class MovimientoJugador : MonoBehaviour
         jugadorRb.velocity = new Vector3(movimientoEjeX * velocidadMovimiento * Time.deltaTime, 0, movimientoEjeZ * velocidadMovimiento * Time.deltaTime);*/
 
     [SerializeField]
-    private float speed = 7f;
+    public float speed = 7f;
     [SerializeField]
-    private float minX = 132f;  // Límite mínimo en el eje X (por ejemplo, la pared izquierda)
+    public float minX = 132f;  // Límite mínimo en el eje X (por ejemplo, la pared izquierda)
     [SerializeField]
-    private float maxX = 980f;   // Límite máximo en el eje X (por ejemplo, la pared derecha)
+    public float maxX = 980f;   // Límite máximo en el eje X (por ejemplo, la pared derecha)
 
     private Rigidbody2D paloRb;
 
     [SerializeField]
-    private float minZ = -1.3f;
+    public float minZ = -1.3f;
     [SerializeField]
-    private float maxZ = 7.7f;
+    public float maxZ = 7.7f;
 
     bool juegoEmpezo;
 
     [SerializeField]
     Vector3 posInicial;
 
+    bool movimientoRevertido;
+    [SerializeField]
+    float tiempoPowerUp;
 
     private void Start()
     {
         juegoEmpezo = true;
         posInicial = transform.position;
+        movimientoRevertido = false;
     }
 
     void Update()
     {
         //if (juegoEmpezo)
        // {
+       if (movimientoRevertido==false)
+        {
             float movement = Input.GetAxisRaw("Horizontal");
             float partida = Input.GetAxisRaw("Vertical");
 
@@ -79,6 +85,17 @@ public class MovimientoJugador : MonoBehaviour
             newPosZ = Mathf.Clamp(newPosZ, minZ, maxZ);
 
             transform.position = new Vector3(newPosX, transform.position.y, newPosZ);
+        }
+
+        if (Input.GetKey(KeyCode.Y))
+        {
+            movimientoRevertido = true;
+            InvertirControles();
+        }
+        else
+        {
+            movimientoRevertido=false;
+        }
        // }
         /*else
         {
@@ -111,5 +128,18 @@ public class MovimientoJugador : MonoBehaviour
         transform.position = posInicial;
     }
 
+    public void InvertirControles()
+    {
+        float movement = -Input.GetAxisRaw("Horizontal");
+        float partida = -Input.GetAxisRaw("Vertical");
+
+        float newPosX = transform.position.x + movement * speed * Time.deltaTime;
+        float newPosZ = transform.position.z + partida * speed * Time.deltaTime;
+
+        newPosX = Mathf.Clamp(newPosX, minX, maxX);
+        newPosZ = Mathf.Clamp(newPosZ, minZ, maxZ);
+
+        transform.position = new Vector3(newPosX, transform.position.y, newPosZ);
+    }
 }
 

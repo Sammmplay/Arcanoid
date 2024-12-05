@@ -118,6 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7f56d7930dc484082c326af5b0538a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vidaBloq: 1
+  vidaBloq: 2
   totalBloq: 16
-  pantallaG: {fileID: 0}
