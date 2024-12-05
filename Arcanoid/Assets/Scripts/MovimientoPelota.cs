@@ -11,12 +11,12 @@ public class MovimientoPelota : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI timeLabel;
     [SerializeField]
-    float tiempoPartida;
+    public float tiempoPartida;
 
     bool pelotaMoviendose = false;
 
     [SerializeField]
-    Rigidbody pelotaRb;
+    public Rigidbody pelotaRb;
 
     [SerializeField]
     public Vector3 velPelota;

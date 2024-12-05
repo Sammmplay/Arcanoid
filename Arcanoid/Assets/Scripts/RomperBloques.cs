@@ -18,12 +18,17 @@ public class BloquesRomper : MonoBehaviour
     {
 
 
+        if (totalBloq <= 0)
+        {
+            Debug.Log("tpm");
+            FindObjectOfType<ScreenScript>().pantallaG.SetActive(true);
+        }
 
 
 
     }
 
-   private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
         vidaBloq--;
 
@@ -32,11 +37,7 @@ public class BloquesRomper : MonoBehaviour
             
             Destroy(gameObject);
             totalBloq--;
-            if (totalBloq <= 0)
-            {
-                FindObjectOfType<ScreenScript>().pantallaG.SetActive(true);
-            }
-
+           
         }
             
    }

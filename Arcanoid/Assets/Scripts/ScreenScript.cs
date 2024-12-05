@@ -54,7 +54,9 @@ public class ScreenScript : MonoBehaviour
     [SerializeField]
     TMP_Dropdown resolutionDropdown;
     Resolution[] resoluciones;
-    
+
+    [SerializeField]
+    GameObject pantallaNewG;
 
     bool estaJugando;
 
@@ -71,6 +73,7 @@ public class ScreenScript : MonoBehaviour
         movimientoPelota.enabled = false;
         canvasJuego.SetActive(false);
         canvasPausa.SetActive(false);
+        pantallaNewG.SetActive(false);
         slideVolume.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
         AudioListener.volume = slideVolume.value;
         Mute();
@@ -93,7 +96,19 @@ public class ScreenScript : MonoBehaviour
         if (estaJugando & Input.GetKeyDown(KeyCode.Escape))
         {
             canvasPausa.SetActive(true);
+            movimientoJugador.enabled = false;
+            movimientoPelota.enabled = false;
+            FindObjectOfType<MovimientoPelota>().pelotaRb.velocity = Vector3.zero;
         }   
+    }
+
+    public void Continuar()
+    {
+        estaJugando = true;
+        canvasPausa.SetActive(false);
+        FindObjectOfType<MovimientoPelota>().pelotaRb.velocity = FindObjectOfType<MovimientoPelota>().transform.position;
+        movimientoJugador.enabled = true;
+        movimientoPelota.enabled = true;
     }
 
     public void StartButton()
@@ -111,14 +126,13 @@ public class ScreenScript : MonoBehaviour
     public void ListoButton()
     {
         pantallaInfo.SetActive(false);
-        canvasPausa.SetActive(false);
         estaJugando = true;
         //tiempoSinFuncionar += Time.deltaTime;
         //if (tiempoSinFuncionar>=5.0f)
         //{
             movimientoJugador.enabled = true;
             movimientoPelota.enabled=true;
-            
+        
         //}
     }
 
@@ -223,7 +237,10 @@ public class ScreenScript : MonoBehaviour
         pantallaG.SetActive(false);
         pantallaP.SetActive(false);
         canvasJuego.SetActive(false);
-        pantallaI.SetActive(true);
+        pantallaI.SetActive(false);
+        pantallaNewG.SetActive(true);
+        //FindObjectOfType<MovimientoPelota>().tiempoPartida = 0;
+
     }
     public void ReintentarButton()
     {
@@ -232,6 +249,12 @@ public class ScreenScript : MonoBehaviour
         pantallaP.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         pantallaI.SetActive(false);
+    }
+
+    public void NuevoJuego()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        FindObjectOfType<Bloques>().GenerarMapa();
     }
 }
 
