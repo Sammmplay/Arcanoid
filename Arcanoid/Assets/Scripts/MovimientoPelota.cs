@@ -11,21 +11,18 @@ public class MovimientoPelota : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI timeLabel;
     [SerializeField]
-    float tiempoPartida;
+    public float tiempoPartida;
 
     bool pelotaMoviendose = false;
 
     [SerializeField]
-    Rigidbody pelotaRb;
+    public Rigidbody pelotaRb;
 
     [SerializeField]
     public Vector3 velPelota;
+    
 
-<<<<<<< Updated upstream
     public bool juegoEmpezo;
-=======
-    [SerializeField] public bool juegoEmpezo;
->>>>>>> Stashed changes
 
     [SerializeField]
     GameObject pantallaP;
@@ -37,6 +34,9 @@ public class MovimientoPelota : MonoBehaviour
 
     [SerializeField]
     Vector3 posInicial;
+
+    [SerializeField]
+    GameObject canvasJuego;
 
     void Start()
     {
@@ -56,22 +56,18 @@ public class MovimientoPelota : MonoBehaviour
             tiempoPartida += Time.deltaTime;
             timeLabel.text = tiempoPartida.ToString();
             timeLabel.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, milesimas);
+            transform.parent = null;
             //transform.position = new Vector3(0, 2.25f, 3.8f);
         }
         else
         {
-<<<<<<< Updated upstream
-            transform.position = posInicial;
-=======
             //transform.position = posInicial;
-            //transform.parent = ;
->>>>>>> Stashed changes
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 
                 juegoEmpezo = true;
-                transform.parent = null;
+                
                 pelotaRb.velocity = velPelota;
                 
                 //gameObject.transform.position = ;
@@ -89,17 +85,16 @@ public class MovimientoPelota : MonoBehaviour
                 vidas--;
                 vidaLabel.text = vidas.ToString();
                 juegoEmpezo = false;
-<<<<<<< Updated upstream
                 FindObjectOfType<MovimientoJugador>().ResetPlayer();
-                transform.parent = FindObjectOfType<MovimientoJugador>().transform;
-=======
+                gameObject.transform.parent = FindObjectOfType<MovimientoJugador>().transform;
                 transform.position = posInicial;
-               // FindObjectOfType<MovimientoJugador>.ResetPlayer();
->>>>>>> Stashed changes
+                juegoEmpezo = false;
+                pelotaRb.velocity=Vector3.zero;
             }
             else if (vidas == 0)
             {
                 pantallaP.SetActive(true);
+                canvasJuego.SetActive(false);
                 juegoEmpezo = false;
             }
         }
